@@ -1,32 +1,28 @@
 ﻿namespace Bookstore.API.Models
 {
-    public class Book
+    public class Book : Product
     {
-        // PK
         public string ISBN { get; init; }
-        public string Title { get; init; }
-        public int AuthorId { get; set; }
-        public Author? Author { get; init; }
-        public int LanguageId { get; set; }
-        public Language? Language { get; set; }
-        public int PublisherId { get; set; }
-        public Publisher? Publisher { get; init; }
         public DateTime PublicationDate { get; init; }
-        public int CategoryId { get; set; }
-        public Category? Category { get; set; }
-        public int Stock { get; set; }
-        public decimal Price { get; set; }
-        public ICollection<StorageLocation> StorageLocations { get; set; } = [];
-        public ICollection<Rating> Ratings { get; set; } = [];
+        public int AuthorId { get; set; }
+        public int LanguageId { get; set; }
+        public int PublisherId { get; set; }
+        public int GenreId { get; set; }
 
-        public Book(string isbn, string title, int authorId, int publisherID, DateTime publicationDate, int categoryId)
+        // Nav properties
+        public Author? Author { get; init; }
+        public Language? Language { get; set; }
+        public Publisher? Publisher { get; init; }
+        public Genre? Genre { get; set; }
+
+        public Book(string name, string description, string isbn, string title, int authorId, int publisherId, DateTime publicationDate, int categoryId, double weight)
+            : base(name, description, categoryId, weight)
         {
-            ISBN = isbn;
-            Title = title;
+            ISBN = isbn ?? throw new ArgumentException("ISBN cannot be null");
             AuthorId = authorId;
-            PublisherId = publisherID;
+            PublisherId = publisherId;
             PublicationDate = publicationDate;
-            CategoryId = categoryId;
+            GenreId = categoryId;
         }
     }
 }
