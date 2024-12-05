@@ -4,6 +4,11 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int MyProperty { get; set; }
+        public Uri? Webpage { get; set; }
+
+        public Publisher(string name)
+        {
+            Name = name;
+        }
     }
 }
