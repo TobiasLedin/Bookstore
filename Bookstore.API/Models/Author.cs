@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FullName { get; set; }
         public string Description { get; set; } = string.Empty;
         public ICollection<Book> Books { get; set; } = [];
 
@@ -12,6 +13,7 @@
         {
             FirstName = firstName;
             LastName = lastName;
+            FullName = $"{firstName} {lastName}";
         }
     }
 }
