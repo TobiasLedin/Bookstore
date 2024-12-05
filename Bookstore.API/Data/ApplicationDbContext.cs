@@ -5,23 +5,22 @@ namespace Bookstore.API.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+
+        // Book related
+        public DbSet<Genre> Genres { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Language> Languages { get; set; }
-        public DbSet<StorageLocation> StoraLocations { get; set; }
-
+        public DbSet<StorageLocation> StorageLocations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) => 
             options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? throw new NullReferenceException("Database connection string not loaded"));
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Book table PK
-            modelBuilder.Entity<Book>()
-                .HasKey(b => b.ISBN);
+
 
             // Book - Author relation
             modelBuilder.Entity<Book>()
